@@ -40,17 +40,24 @@ Build with `mkdocs build` and serve `site/` from any static host, or run `mkdocs
 
 ### GitHub Pages (this repository)
 
-The workflow **Deploy documentation** pushes the built site to the **`gh-pages`** branch. In the repo **Settings → Pages → Build and deployment**, set **Source** to **Deploy from a branch**, branch **`gh-pages`**, folder **`/` (root)**, then save. If **Source** is left on **GitHub Actions** while using this workflow, the default `github.io/<repo>/` URL stays empty (404) because GitHub will not publish the `gh-pages` branch. On GitHub, switch the branch dropdown to **`gh-pages`** and confirm **`index.html`** exists at the root of that branch.
+#### Default: only this repo (`github.io/<repo>/`)
 
-#### Same domain as another project (e.g. `mlwithshubh.me/Socio_Sim_AI/`)
+If you do **not** set the variable below, the workflow pushes the MkDocs build to this repository’s **`gh-pages`** branch. Then use **Settings → Pages → Source: Deploy from a branch → `gh-pages` → `/`**.
 
-One GitHub Pages site cannot claim two different repos as `https://your-domain.com/path-a` and `https://your-domain.com/path-b` without a **single** publishing repo or a reverse proxy. To add Astro docs **without** changing an existing site on the same apex domain, use a **subdomain** for this repo only—for example **`https://astro.mlwithshubh.me`**—while the other project stays at **`https://mlwithshubh.me/Socio_Sim_AI/`**.
+#### `https://mlwithshubh.me/astro/` (folder next to `/Socio_Sim_AI/`)
 
-1. In DNS for `mlwithshubh.me`, add a **CNAME** record: host **`astro`** → target **`shubhankar9934.github.io`** (GitHub’s [custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-a-subdomain)).
-2. In this repo: **Settings → Pages → Custom domain** → **`astro.mlwithshubh.me`**, wait for DNS check, enable **Enforce HTTPS**.
-3. `mkdocs.yml` **`site_url`** and the workflow **`cname`** are set to that subdomain; change both if you prefer another host (e.g. `docs-astro.mlwithshubh.me`).
+That URL is served by your **root GitHub Pages repository** (the one `mlwithshubh.me` points at—often **`username.github.io`**), not by this `astro` repo alone. If `/astro/` shows a **README** instead of the **Material** MkDocs UI, the folder only has markdown/README content; you need to deploy the **`mkdocs build`** output (`site/`) **into** that repo under **`astro/`**.
 
-Until DNS is correct, the subdomain may not resolve; **`https://shubhankar9934.github.io/astro/`** can still work as the GitHub default URL if **Pages → Custom domain** is empty—but then set **`site_url`** back to the `github.io` URL for correct asset paths, or finish DNS + custom domain first.
+In **this** (`astro`) repository:
+
+1. Create a **PAT** (classic *or* fine-grained) with **Contents: Read and write** on the **root site** repo (e.g. `Shubhankar9934.github.io`—name must match yours).
+2. **Settings → Secrets and variables → Actions → New repository secret** → `GH_PAGES_DEPLOY_TOKEN` = the PAT.
+3. **Settings → Secrets and variables → Actions → Variables → New repository variable** → `PUBLISH_TO_PAGES_ROOT` = `true`.
+4. Optional variables: `PAGES_ROOT_REPO` (default `Shubhankar9934/Shubhankar9934.github.io`), `PAGES_ROOT_BRANCH` (default `main`) if your site repo name or default branch differs.
+
+The workflow uses [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) with **`destination_dir: astro`** and **`keep_files: true`** so other paths (e.g. **`/Socio_Sim_AI/`**) are not deleted. After a green **Deploy documentation** run, **`https://mlwithshubh.me/astro/`** should show the full MkDocs site; **`site_url`** in `mkdocs.yml` must stay **`https://mlwithshubh.me/astro/`** so CSS and links resolve.
+
+See GitHub’s [custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) docs if DNS for the apex domain is not already configured.
 
 ## Security hardening (operational)
 

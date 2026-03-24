@@ -1,13 +1,15 @@
-# Publishes MkDocs output to the orphan branch `gh-pages`.
+# MkDocs → https://mlwithshubh.me/astro/  (subfolder on your *root* GitHub Pages repo)
 #
-# If https://<user>.github.io/<repo>/ shows “There isn't a GitHub Pages site here” AFTER
-# this workflow is green: Pages is still using the wrong *source*. You MUST use the branch,
-# not GitHub Actions:
-#   Settings → Pages → Build and deployment → Source: Deploy from a branch
-#   Branch: gh-pages  ·  Folder: / (root)  ·  Save
-# If Source stays “GitHub Actions”, GitHub never serves gh-pages (404).
+# That URL is NOT served from this repo’s gh-pages alone; it comes from the site repo that
+# already hosts mlwithshubh.me (e.g. Shubhankar9934.github.io). This workflow pushes ./site
+# into that repo under destination_dir astro/ without wiping sibling folders (Socio_Sim_AI, …).
 #
-# Also: Settings → Actions → General → Workflow permissions: Read and write (to push gh-pages).
+# Setup (this “astro” repo):
+#   1. Fine-grained or classic PAT with Contents: Read+Write on the *root site* repository.
+#   2. Settings → Secrets → Actions → GH_PAGES_DEPLOY_TOKEN = that PAT.
+#   3. Optional: repo Variable PAGES_ROOT_REPO = owner/name (default below). PAGES_ROOT_BRANCH if not main.
+#
+# If you skip the secret, only the “this repo gh-pages” step runs (github.io/astro/), not mlwithshubh.me/astro/.
 
 name: Deploy documentation
 
@@ -40,12 +42,23 @@ jobs:
         run: pip install -r requirements-docs.txt
       - name: Build MkDocs site
         run: mkdocs build --strict
-      - name: Push site to gh-pages branch
+
+      # Publishes only into site-repo/astro/; keep_files preserves /Socio_Sim_AI/ etc.
+      - name: Push site to root Pages repo (mlwithshubh.me/astro/)
+        if: ${{ vars.PUBLISH_TO_PAGES_ROOT == 'true' }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.GH_PAGES_DEPLOY_TOKEN }}
+          external_repository: ${{ vars.PAGES_ROOT_REPO != '' && vars.PAGES_ROOT_REPO || 'Shubhankar9934/Shubhankar9934.github.io' }}
+          publish_branch: ${{ vars.PAGES_ROOT_BRANCH != '' && vars.PAGES_ROOT_BRANCH || 'main' }}
+          publish_dir: ./site
+          destination_dir: astro
+          keep_files: true
+
+      - name: Push site to this repo gh-pages (fallback)
+        if: ${{ vars.PUBLISH_TO_PAGES_ROOT != 'true' }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
           force_orphan: true
-          # Puts CNAME on gh-pages so GitHub Pages can serve this repo at the subdomain.
-          # DNS: CNAME astro → shubhankar9934.github.io  (see docs/setup/deployment.md)
-          cname: astro.mlwithshubh.me
