@@ -1,6 +1,7 @@
 site_name: Astro Trading
 site_description: Enterprise technical documentation for astro-trading
-site_url: https://shubhankar9934.github.io/astro/
+# Public URL: subdomain keeps mlwithshubh.me/Socio_Sim_AI/ on your other site unchanged.
+site_url: https://astro.mlwithshubh.me/
 repo_url: https://github.com/Shubhankar9934/astro
 docs_dir: docs
 site_dir: site

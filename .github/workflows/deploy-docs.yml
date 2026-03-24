@@ -46,3 +46,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
           force_orphan: true
+          # Puts CNAME on gh-pages so GitHub Pages can serve this repo at the subdomain.
+          # DNS: CNAME astro → shubhankar9934.github.io  (see docs/setup/deployment.md)
+          cname: astro.mlwithshubh.me
