@@ -44,7 +44,7 @@ jobs:
         run: mkdocs build --strict
 
       - name: Push to root site repo (mlwithshubh.me/astro/)
-        if: vars.DEPLOY_ROOT_SITE == 'true'
+        if: vars.DEPLOY_ROOT_SITE == 'true' || vars.DEPLOY_ROOT_SITE == 'True'
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.GH_PAGES_DEPLOY_TOKEN }}
@@ -54,9 +54,25 @@ jobs:
           destination_dir: astro
 
       - name: Push to this repo gh-pages only
-        if: vars.DEPLOY_ROOT_SITE != 'true'
+        if: vars.DEPLOY_ROOT_SITE != 'true' && vars.DEPLOY_ROOT_SITE != 'True'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
           force_orphan: true
+
+      # If mlwithshubh.me/astro still shows the old README page, read this block in the log.
+      - name: Which URL did this run update?
+        if: always()
+        run: |
+          echo "========== Deploy documentation — which site was updated? =========="
+          echo "DEPLOY_ROOT_SITE='${{ vars.DEPLOY_ROOT_SITE }}' (must be true/True to update mlwithshubh.me)"
+          echo "External target: ${{ vars.PAGES_ROOT_REPO != '' && vars.PAGES_ROOT_REPO || 'Shubhankar9934/Shubhankar9934.github.io' }} @ branch ${{ vars.PAGES_ROOT_BRANCH != '' && vars.PAGES_ROOT_BRANCH || 'main' }} → folder astro/"
+          if [ "${{ vars.DEPLOY_ROOT_SITE }}" = "true" ] || [ "${{ vars.DEPLOY_ROOT_SITE }}" = "True" ]; then
+            echo "This run SHOULD have updated mlwithshubh.me/astro/ (if PAT + branch + Pages settings match)."
+          else
+            echo "This run ONLY updated THIS repo's gh-pages → use https://shubhankar9934.github.io/astro/ if Pages is enabled here."
+            echo "mlwithshubh.me/astro/ will NOT change until you set variable DEPLOY_ROOT_SITE=true (or True) AND secret GH_PAGES_DEPLOY_TOKEN."
+          fi
+          echo "On the *site* repo: Settings → Pages → Branch must equal publish branch above; Folder should be / (root), not /docs only."
+          echo "======================================================================="

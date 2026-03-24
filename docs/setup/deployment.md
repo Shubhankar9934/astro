@@ -58,6 +58,24 @@ After a green **Deploy documentation** run, open **`https://mlwithshubh.me/astro
 
 See GitHub’s [custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) docs for apex DNS if needed.
 
+#### Troubleshooting: mlwithshubh.me/astro still shows the long “Project Astro” text
+
+1. **Open the latest workflow run** → expand **“Which URL did this run update?”**  
+   - If it says **only updated THIS repo’s gh-pages**, set **Variable** **`DEPLOY_ROOT_SITE`** = **`true`** (lowercase) and add **`GH_PAGES_DEPLOY_TOKEN`**, then re-run.
+
+2. **On the *site* repository** (the one `mlwithshubh.me` uses): **Settings → Pages**  
+   - Note **Branch** (e.g. `main` or `gh-pages`) and **folder** (`/` or `/docs`).  
+   - The workflow pushes to branch **`main`** by default. If Pages publishes from **`gh-pages`**, set variable **`PAGES_ROOT_BRANCH`** = **`gh-pages`** on the **astro** repo.  
+   - If Pages publishes from **`/docs`** only, files at repo **root** `astro/` are **not** on the live site—you must either change Pages to **root `/`** or change the deploy layout (not covered here).
+
+3. **Confirm files on GitHub**: On the site repo, open **`astro/index.html`** on the **same branch Pages uses**. Search the file for **`assets/stylesheets/main`** (Material). If you only see markdown or a tiny HTML file, the MkDocs deploy never landed on that branch/path.
+
+4. **PAT scope**: Fine-grained token must include **Contents: Read and write** on the **site** repo (`*.github.io`), not only on **`astro`**.
+
+5. **Repo name**: If your user site is not `Shubhankar9934.github.io`, set **`PAGES_ROOT_REPO`** to `owner/repo` exactly.
+
+6. **Hard refresh** or a private window after a successful push (CDN can lag a few minutes).
+
 ## Security hardening (operational)
 
 - Restrict CORS in `astro/api/app.py` for production.
