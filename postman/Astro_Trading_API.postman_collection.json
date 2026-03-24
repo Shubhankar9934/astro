@@ -1,0 +1,262 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-astro-trading-api",
+    "name": "Astro Trading API — execution flow",
+    "description": "Ordered manual smoke test for the Astro FastAPI service.\n\n**Prerequisites**\n1. Run the API from the **Astro project directory** (folder with `pyproject.toml`): `python scripts/run_api.py`.\n2. IB Gateway or TWS running (paper port 7497 by default); match `astro/configs/ibkr.yaml`.\n3. `OPENAI_API_KEY` in `.env` in that same directory (for agent/decision routes).\n4. Optional: `ASTRO_API_KEY` — if set, add header `X-API-Key` on **Execution → Place order** (collection variable `apiKey`).\n5. On server start, the API **attempts IBKR connect** automatically. Set `ASTRO_SKIP_IBKR_CONNECT=1` to skip. `GET /system/health` shows `ibkr_connected` and `ibkr_connect_error`.\n6. Data routes need `data/features/{symbol}_fused.parquet` under your configured `data_root` (usually `./data/` when cwd is the Astro project root).\n7. Model predict needs `models/checkpoints/best.pt` and `scaler.npz`.\n\n**Suggested flow**\nRun folders **01 → 09** in order. After a successful decision, copy `decisionId` into the collection variable. Folder **10** is WebSocket/docs note.\n\n**Import:** Postman → Import → this file. Set collection variables `baseUrl`, `symbol`, `tradeDate`, etc.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8000" },
+    { "key": "apiKey", "value": "" },
+    { "key": "symbol", "value": "SPY" },
+    { "key": "tradeDate", "value": "2024-06-01" },
+    { "key": "decisionId", "value": "1" },
+    { "key": "fusedPath", "value": "data/features/SPY_fused.parquet" },
+    { "key": "idempotencyKey", "value": "postman-smoke-001" }
+  ],
+  "item": [
+    {
+      "name": "01 — System (verify server + IBKR + model)",
+      "description": "Start the API from the Astro project directory: `python scripts/run_api.py` (loads `.env`). Health reflects shared IBKR session from startup.",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/system/health",
+            "description": "Returns `status`, `ibkr_connected` (true if startup connect succeeded), `ibkr_connect_error` (if connect failed or ib-insync missing), `model_loaded` (checkpoint exists)."
+          },
+          "response": []
+        },
+        {
+          "name": "Merged config (sanitized)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/system/config",
+            "description": "YAML merge: system, agents, model, risk, ibkr (password fields stripped)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 — Data (Parquet features)",
+      "description": "Requires fused feature file on disk.",
+      "item": [
+        {
+          "name": "Load fused features tail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/data/features?symbol={{symbol}}&timeframe=1d",
+            "description": "Resolves `data/features/{symbol}_fused.parquet` via config `data_root`."
+          },
+          "response": []
+        },
+        {
+          "name": "Market slice",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/data/market?symbol={{symbol}}",
+            "description": "OHLCV-oriented slice from fused data where available."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 — Model (transformer predict)",
+      "description": "Needs trained checkpoint paths from `model.yaml`.",
+      "item": [
+        {
+          "name": "Predict p_up / uncertainty",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/model/predict",
+            "description": "Runs inference on latest window from fused Parquet; validates schema vs registry."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 — Agents (LLM slices)",
+      "description": "Individual agent stages; each call is stateless on the server.",
+      "item": [
+        {
+          "name": "Run analysts",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"trade_date\": \"{{tradeDate}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/agents/analysts",
+            "description": "Market/social/news/fundamentals analysts per `agents.yaml`."
+          },
+          "response": []
+        },
+        {
+          "name": "Research synthesizer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"trade_date\": \"{{tradeDate}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/agents/research",
+            "description": "Bull/bear debate + investment plan (full graph slice)."
+          },
+          "response": []
+        },
+        {
+          "name": "Risk judge (custom context)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_of_interest\": \"{{symbol}}\",\n  \"trade_date\": \"{{tradeDate}}\",\n  \"market_report\": \"Stub market summary.\",\n  \"sentiment_report\": \"Stub sentiment.\",\n  \"news_report\": \"Stub news.\",\n  \"fundamentals_report\": \"Stub fundamentals.\",\n  \"investment_plan\": \"Stub plan.\",\n  \"trader_investment_plan\": \"Stub trader plan.\",\n  \"astro_context\": { \"symbol\": \"{{symbol}}\", \"as_of\": \"{{tradeDate}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/agents/risk",
+            "description": "Supply reports manually or paste outputs from analysts/research steps."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 — Decision (full pipeline)",
+      "description": "End-to-end: context build → executor → policy → logging → DB row. Heavy LLM usage.",
+      "item": [
+        {
+          "name": "Run decision (fast or full)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"trade_date\": \"{{tradeDate}}\",\n  \"mode\": \"fast\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/decision/run",
+            "description": "Omit `mode` to use `decision_mode_default` from agents.yaml. Response includes `decision_id` — copy into collection variable `decisionId` for replay."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "06 — Replay",
+      "description": "Fetch logged decision by SQLite id or JSON filename.",
+      "item": [
+        {
+          "name": "Replay by decision_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/replay?decision_id={{decisionId}}",
+            "description": "Uses row from MetadataDB written during `/decision/run`."
+          },
+          "response": []
+        },
+        {
+          "name": "Replay by log filename",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/replay?log_file=decision_{{symbol}}_{{tradeDate}}.json",
+            "description": "File under `data/cache/decision_logs/` (relative name only)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "07 — Backtest",
+      "item": [
+        {
+          "name": "Run backtest",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fused_path\": \"{{fusedPath}}\",\n  \"signal_col\": \"sentiment_score\",\n  \"symbol\": \"{{symbol}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/backtest/run",
+            "description": "`fused_path` relative to process cwd (Astro project root when using run_api.py)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "08 — Experiments",
+      "item": [
+        {
+          "name": "Log experiment payload",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model_version\": \"postman-smoke\",\n  \"schema_id\": \"fused_v1\",\n  \"payload\": { \"source\": \"postman\", \"note\": \"manual test\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/experiments/log",
+            "description": "Persists to SQLite experiments table."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "09 — Execution (IBKR paper)",
+      "description": "Requires connected IBKR (startup or lazy connect here). API allows only `ibkr.paper: true`. If `ASTRO_API_KEY` is set, set header `X-API-Key: {{apiKey}}`.",
+      "item": [
+        {
+          "name": "Place market order (idempotent)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Key", "value": "{{apiKey}}", "description": "Required only when env ASTRO_API_KEY is set; leave empty otherwise." }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"{{symbol}}\",\n  \"action\": \"BUY\",\n  \"quantity\": 1,\n  \"idempotency_key\": \"{{idempotencyKey}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/execution/order",
+            "description": "Uses shared IB client from server startup when available. Change `idempotencyKey` for a new order attempt."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "10 — WebSocket (heartbeat)",
+      "description": "In Postman: New → WebSocket → `ws://localhost:8000/ws/stream` (adjust host if needed). Not representable as REST in this collection v2.1.",
+      "item": [
+        {
+          "name": "README — open WebSocket manually",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/docs",
+            "description": "Use Swagger UI or a WebSocket client. Endpoint: `ws://host:port/ws/stream`."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+max_position_fraction: 0.25
+max_daily_loss_fraction: 0.02
+max_concentration: 0.4
+max_gross_exposure_fraction: 1.0
+default_slippage_bps: 5.0
+portfolio_nav: 1000000.0
+# Vol hierarchy for sizing: fused ATR bar -> realized vol (ret_1 stdev * price) -> default_atr_fraction * price
+default_atr_fraction: 0.02
+require_vol_for_sizing: false
+# If max(updated_at) on positions is older than this many minutes, API sets portfolio_state_stale (0 = disabled)
+positions_stale_warn_minutes: 0

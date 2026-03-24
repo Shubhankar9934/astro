@@ -1,0 +1,7 @@
+timezone: "America/New_York"
+default_timeframe: "1d"
+decision_debounce_seconds: 60
+max_llm_rounds_fast: 1
+log_level: "INFO"
+data_root: "data"
+feature_schema_version: "1"

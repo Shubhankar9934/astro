@@ -1,0 +1,95 @@
+site_name: Astro Trading
+site_description: Enterprise technical documentation for astro-trading
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - search
+  - mermaid2:
+      version: 10.6.1
+
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.details
+  # Required so ```mermaid is not treated as a generic code block (which breaks rendering).
+  # Emits <div class="mermaid">…</div> for mkdocs-mermaid2-plugin + Mermaid.js.
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+
+nav:
+  - Home: index.md
+  - Overview:
+      - Vision: overview/vision.md
+      - Goals: overview/goals.md
+      - Problem statement: overview/problem_statement.md
+  - Architecture:
+      - HLD: architecture/hld.md
+      - System design: architecture/system_design.md
+      - Data flow: architecture/data_flow.md
+      - Sequence diagrams: architecture/sequence_diagrams.md
+  - Design:
+      - LLD: design/lld.md
+      - Module breakdown: design/module_breakdown.md
+      - Class diagrams: design/class_diagrams.md
+      - Design patterns: design/design_patterns.md
+  - API:
+      - Overview: api/overview.md
+      - Endpoints: api/endpoints.md
+  - Modules:
+      - agents: modules/agents.md
+      - api: modules/api.md
+      - backtesting: modules/backtesting.md
+      - configs: modules/configs.md
+      - decision_engine: modules/decision_engine.md
+      - evaluation: modules/evaluation.md
+      - execution: modules/execution.md
+      - features: modules/features.md
+      - ingestion: modules/ingestion.md
+      - models: modules/models.md
+      - monitoring: modules/monitoring.md
+      - pipelines: modules/pipelines.md
+      - services: modules/services.md
+      - storage: modules/storage.md
+      - utils: modules/utils.md
+  - Setup:
+      - Installation: setup/installation.md
+      - Configuration: setup/configuration.md
+      - Deployment: setup/deployment.md
+  - Guides:
+      - Developer guide: guides/developer_guide.md
+      - Contribution: guides/contribution.md
+      - Debugging: guides/debugging.md
+  - Roadmap:
+      - Future scope: roadmap/future_scope.md
+
+extra:
+  generator: false

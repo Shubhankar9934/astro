@@ -1,0 +1,4 @@
+# MkDocs site for astro-trading (pip install -r requirements-docs.txt)
+mkdocs>=1.6.0
+mkdocs-material>=9.5.0
+mkdocs-mermaid2-plugin>=1.2.0

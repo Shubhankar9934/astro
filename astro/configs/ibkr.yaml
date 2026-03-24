@@ -1,0 +1,9 @@
+host: "127.0.0.1"
+# IB Gateway (no TWS): live socket 4001; paper Gateway uses 4002. Port must match Gateway’s API port.
+port: 4001
+client_id: 1
+# App safety: /execution/order only runs when paper is true (live orders blocked in this build).
+paper: true
+read_only: false
+connect_timeout: 15
+# Secrets: IBKR_USERNAME / IBKR_PASSWORD via .env if using full auth; Gateway must be running.

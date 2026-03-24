@@ -1,0 +1,33 @@
+{
+  "default_schema_id": "fused_v1",
+  "feature_schema_version": "1",
+  "schemas": {
+    "fused_v1": {
+      "description": "Fused daily features: OHLCV + technicals + real news/sentiment aggregates + optional price-action proxies (sentiment_proxy_momentum, news_intensity_proxy). Retrain models after adding proxy columns.",
+      "required_columns": [
+        "Date",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "ret_1",
+        "rsi_14",
+        "macd",
+        "macds",
+        "news_event_count",
+        "sentiment_score"
+      ],
+      "optional_columns": [
+        "macdh",
+        "boll",
+        "boll_ub",
+        "boll_lb",
+        "atr",
+        "date",
+        "sentiment_proxy_momentum",
+        "news_intensity_proxy"
+      ]
+    }
+  }
+}

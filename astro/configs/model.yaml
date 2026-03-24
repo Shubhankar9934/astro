@@ -1,0 +1,24 @@
+schema_id: "fused_v1"
+seq_len: 32
+timeframe: "1d"
+feature_columns:
+  - open
+  - high
+  - low
+  - close
+  - volume
+  - ret_1
+  - rsi_14
+  - macd
+  - macds
+d_model: 64
+n_heads: 4
+n_layers: 2
+dropout: 0.1
+forward_horizon_bars: 1
+label: "direction"  # direction | regression
+batch_size: 32
+learning_rate: 0.001
+epochs: 5
+checkpoint_dir: "models/checkpoints"
+scaler_path: "models/checkpoints/scaler.npz"

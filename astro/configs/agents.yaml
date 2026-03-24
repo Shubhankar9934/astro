@@ -1,0 +1,42 @@
+# Optional: first JSON block then narrative for technical analyst (audit-friendly).
+technical_structured_json: true
+macro_analyst:
+  enabled: false
+
+# fundamentals: enable only when a real FundamentalSource populates DecisionContext.fundamentals_summary
+# and sets context.extra["fundamentals_has_evidence"] = True in context_builder.
+selected_analysts:
+  - market
+  - social
+  - news
+fast_mode_analysts:
+  - market
+max_debate_rounds: 1
+max_risk_discuss_rounds: 1
+decision_mode_default: full  # fast | full
+quick_think:
+  provider: "openai"
+  model: "gpt-4o-mini"
+  temperature: 0.3
+deep_think:
+  provider: "openai"
+  model: "gpt-4o"
+  temperature: 0.2
+memory_n_matches: 2
+analyst_mode: "context"  # context | tools (tools requires legacy dataflows)
+
+model_governance:
+  # strict: HTTP 503 if model required but missing. degraded|dev: allow run (degraded sets response flags).
+  # Override with env ASTRO_GOVERNANCE_MODE.
+  governance_mode: strict
+  enabled: true
+  min_edge_for_directional: 0.08
+  # Optional: set min_edge_weak < min_edge_for_directional for weak band (allow_llm_in_weak_band)
+  # min_edge_weak: 0.03
+  allow_llm_in_weak_band: false
+  allow_llm_only_without_model: false
+  agents_can_override_direction: false
+
+uncertainty_debate_threshold: 0.15
+skip_debate_if_certain: true
+uncertainty_certainty_max: 0.05

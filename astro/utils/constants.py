@@ -1,0 +1,13 @@
+ANALYST_MARKET = "market"
+ANALYST_SOCIAL = "social"
+ANALYST_NEWS = "news"
+ANALYST_FUNDAMENTALS = "fundamentals"
+
+STEP_BULL = "bull"
+STEP_BEAR = "bear"
+STEP_RESEARCH_MANAGER = "research_manager"
+STEP_TRADER = "trader"
+STEP_AGGRESSIVE = "aggressive"
+STEP_CONSERVATIVE = "conservative"
+STEP_NEUTRAL = "neutral"
+STEP_RISK_JUDGE = "risk_judge"
