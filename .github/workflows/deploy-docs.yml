@@ -1,9 +1,11 @@
-# GitHub Pages via Actions — one job (upload + deploy in same runner; avoids artifact handoff issues).
+# Publishes MkDocs output to the orphan branch `gh-pages`.
+# Works with the classic Pages UI (no deploy-pages API / no “enable Actions publisher” step).
 #
-# First-time setup (or you get 404):
-#   1. Repo → Settings → Pages → Build and deployment → Source: GitHub Actions (not "Deploy from a branch").
-#   2. Repo → Settings → Actions → General → Workflow permissions: allow "Read and write" if deploy fails on permissions.
-#   3. Run "Deploy documentation" in Actions (or push to main). Wait for green check, then open site_url from mkdocs.yml.
+# GitHub setup:
+#   1. Repo → Settings → Pages → Build and deployment → Source: Deploy from a branch
+#   2. Branch: gh-pages  ·  Folder: / (root)  ·  Save
+#   3. Settings → Actions → General → Workflow permissions: Read and write (needed to push gh-pages)
+#   4. Push to main (or run this workflow manually). Site: https://<user>.github.io/<repo>/
 
 name: Deploy documentation
 
@@ -21,16 +23,12 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
-  build-and-deploy:
+  build-and-publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -40,9 +38,9 @@ jobs:
         run: pip install -r requirements-docs.txt
       - name: Build MkDocs site
         run: mkdocs build --strict
-      - uses: actions/upload-pages-artifact@v3
+      - name: Push site to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: site
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          force_orphan: true
