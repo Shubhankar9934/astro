@@ -1,0 +1,1492 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Enterprise technical documentation for astro-trading" name="description"/>
+<link href="https://mlwithshubh.me/astro/" rel="canonical"/>
+<link href="overview/vision/" rel="next"/>
+<link href="assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
+<title>Astro Trading</title>
+<link href="assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link href="assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#astro-trading-system">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Astro Trading" class="md-header__button md-logo" data-md-component="logo" href="." title="Astro Trading">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Astro Trading
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/Shubhankar9934/astro" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href=".">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="overview/vision/">
+          
+  
+  
+  Overview
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="architecture/hld/">
+          
+  
+  
+  Architecture
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="design/lld/">
+          
+  
+  
+  Design
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="api/overview/">
+          
+  
+  
+  API
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="modules/agents/">
+          
+  
+  
+  Modules
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="setup/installation/">
+          
+  
+  
+  Setup
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="guides/developer_guide/">
+          
+  
+  
+  Guides
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="roadmap/future_scope/">
+          
+  
+  
+  Roadmap
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Astro Trading" class="md-nav__button md-logo" data-md-component="logo" href="." title="Astro Trading">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+    Astro Trading
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/Shubhankar9934/astro" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href=".">
+<span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-astro">
+<span class="md-ellipsis">
+      
+        What is Astro?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-problems-astro-solves">
+<span class="md-ellipsis">
+      
+        What problems Astro solves
+      
+    </span>
+</a>
+<nav aria-label="What problems Astro solves" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-fragmented-trading-pipelines">
+<span class="md-ellipsis">
+      
+        1. Fragmented trading pipelines
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-limited-explainability-for-ml-only-signals">
+<span class="md-ellipsis">
+      
+        2. Limited explainability for ML-only signals
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-insufficient-control-over-model-versus-llm-behavior">
+<span class="md-ellipsis">
+      
+        3. Insufficient control over model versus LLM behavior
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-train-versus-live-inconsistency">
+<span class="md-ellipsis">
+      
+        4. Train versus live inconsistency
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#key-capabilities">
+<span class="md-ellipsis">
+      
+        Key capabilities
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-astro-works-end-to-end-flow">
+<span class="md-ellipsis">
+      
+        How Astro works (end-to-end flow)
+      
+    </span>
+</a>
+<nav aria-label="How Astro works (end-to-end flow)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-by-step-full-decision-path">
+<span class="md-ellipsis">
+      
+        Step-by-step (full decision path)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#system-architecture-overview">
+<span class="md-ellipsis">
+      
+        System architecture overview
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#core-components">
+<span class="md-ellipsis">
+      
+        Core components
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decision-intelligence-what-is-distinctive">
+<span class="md-ellipsis">
+      
+        Decision intelligence (what is distinctive)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#who-should-use-astro">
+<span class="md-ellipsis">
+      
+        Who should use Astro
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-started">
+<span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#current-limitations">
+<span class="md-ellipsis">
+      
+        Current limitations
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#future-scope">
+<span class="md-ellipsis">
+      
+        Future scope
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#safety-reminders">
+<span class="md-ellipsis">
+      
+        Safety reminders
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Overview
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="overview/vision/">
+<span class="md-ellipsis">
+    
+  
+    Vision
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="overview/goals/">
+<span class="md-ellipsis">
+    
+  
+    Goals
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="overview/problem_statement/">
+<span class="md-ellipsis">
+    
+  
+    Problem statement
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="architecture/hld/">
+<span class="md-ellipsis">
+    
+  
+    HLD
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="architecture/system_design/">
+<span class="md-ellipsis">
+    
+  
+    System design
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="architecture/data_flow/">
+<span class="md-ellipsis">
+    
+  
+    Data flow
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="architecture/sequence_diagrams/">
+<span class="md-ellipsis">
+    
+  
+    Sequence diagrams
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Design
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="design/lld/">
+<span class="md-ellipsis">
+    
+  
+    LLD
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="design/module_breakdown/">
+<span class="md-ellipsis">
+    
+  
+    Module breakdown
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="design/class_diagrams/">
+<span class="md-ellipsis">
+    
+  
+    Class diagrams
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="design/design_patterns/">
+<span class="md-ellipsis">
+    
+  
+    Design patterns
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="api/overview/">
+<span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="api/endpoints/">
+<span class="md-ellipsis">
+    
+  
+    Endpoints
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Modules
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/agents/">
+<span class="md-ellipsis">
+    
+  
+    agents
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/api/">
+<span class="md-ellipsis">
+    
+  
+    api
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/backtesting/">
+<span class="md-ellipsis">
+    
+  
+    backtesting
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/configs/">
+<span class="md-ellipsis">
+    
+  
+    configs
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/decision_engine/">
+<span class="md-ellipsis">
+    
+  
+    decision_engine
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/evaluation/">
+<span class="md-ellipsis">
+    
+  
+    evaluation
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/execution/">
+<span class="md-ellipsis">
+    
+  
+    execution
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/features/">
+<span class="md-ellipsis">
+    
+  
+    features
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/ingestion/">
+<span class="md-ellipsis">
+    
+  
+    ingestion
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/models/">
+<span class="md-ellipsis">
+    
+  
+    models
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/monitoring/">
+<span class="md-ellipsis">
+    
+  
+    monitoring
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/pipelines/">
+<span class="md-ellipsis">
+    
+  
+    pipelines
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/services/">
+<span class="md-ellipsis">
+    
+  
+    services
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/storage/">
+<span class="md-ellipsis">
+    
+  
+    storage
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="modules/utils/">
+<span class="md-ellipsis">
+    
+  
+    utils
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="setup/installation/">
+<span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="setup/configuration/">
+<span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="setup/deployment/">
+<span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_8_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="guides/developer_guide/">
+<span class="md-ellipsis">
+    
+  
+    Developer guide
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="guides/contribution/">
+<span class="md-ellipsis">
+    
+  
+    Contribution
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="guides/debugging/">
+<span class="md-ellipsis">
+    
+  
+    Debugging
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_9_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_9">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Roadmap
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="roadmap/future_scope/">
+<span class="md-ellipsis">
+    
+  
+    Future scope
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-astro">
+<span class="md-ellipsis">
+      
+        What is Astro?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-problems-astro-solves">
+<span class="md-ellipsis">
+      
+        What problems Astro solves
+      
+    </span>
+</a>
+<nav aria-label="What problems Astro solves" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-fragmented-trading-pipelines">
+<span class="md-ellipsis">
+      
+        1. Fragmented trading pipelines
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-limited-explainability-for-ml-only-signals">
+<span class="md-ellipsis">
+      
+        2. Limited explainability for ML-only signals
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-insufficient-control-over-model-versus-llm-behavior">
+<span class="md-ellipsis">
+      
+        3. Insufficient control over model versus LLM behavior
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-train-versus-live-inconsistency">
+<span class="md-ellipsis">
+      
+        4. Train versus live inconsistency
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#key-capabilities">
+<span class="md-ellipsis">
+      
+        Key capabilities
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-astro-works-end-to-end-flow">
+<span class="md-ellipsis">
+      
+        How Astro works (end-to-end flow)
+      
+    </span>
+</a>
+<nav aria-label="How Astro works (end-to-end flow)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-by-step-full-decision-path">
+<span class="md-ellipsis">
+      
+        Step-by-step (full decision path)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#system-architecture-overview">
+<span class="md-ellipsis">
+      
+        System architecture overview
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#core-components">
+<span class="md-ellipsis">
+      
+        Core components
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decision-intelligence-what-is-distinctive">
+<span class="md-ellipsis">
+      
+        Decision intelligence (what is distinctive)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#who-should-use-astro">
+<span class="md-ellipsis">
+      
+        Who should use Astro
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-started">
+<span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#current-limitations">
+<span class="md-ellipsis">
+      
+        Current limitations
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#future-scope">
+<span class="md-ellipsis">
+      
+        Future scope
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#safety-reminders">
+<span class="md-ellipsis">
+      
+        Safety reminders
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="astro-trading-system">Astro Trading System<a class="headerlink" href="#astro-trading-system" title="Permanent link">¶</a></h1>
+<blockquote>
+<p>A modular trading intelligence platform that combines <strong>data pipelines</strong>, <strong>optional transformer inference</strong>, <strong>LLM-based agents</strong>, and a <strong>governed decision engine</strong> behind an optional <strong>FastAPI</strong> control plane. Decisions are <strong>triggered</strong> by API or batch scripts; <strong>broker execution</strong> is a separate, explicit step.</p>
+</blockquote>
+<p><strong>Package:</strong> <code>astro-trading</code> · <strong>Import:</strong> <code>astro</code> · <strong>Version:</strong> 0.1.0 (<code>pyproject.toml</code>, <code>astro/__init__.py</code>)</p>
+<hr/>
+<h2 id="what-is-astro">What is Astro?<a class="headerlink" href="#what-is-astro" title="Permanent link">¶</a></h2>
+<p>Astro is a <strong>layered trading intelligence stack</strong> that bridges:</p>
+<ul>
+<li><strong>Structured market and feature data</strong> (Parquet, schema-validated)</li>
+<li><strong>Machine learning</strong> (optional PyTorch transformer: <code>p_up</code>, uncertainty)</li>
+<li><strong>LLM-driven reasoning</strong> (analysts, research debate, trader, risk cycle)</li>
+</ul>
+<p>Unlike monolithic notebooks that mix ingestion, prompts, and execution, Astro keeps <strong>pipelines</strong>, <strong>models</strong>, <strong>agents</strong>, and <strong>orchestration</strong> in separate packages. Collaboration happens through well-defined artifacts and types—especially <strong><code>DecisionContext</code></strong> (built by <code>build_decision_context</code> in <code>astro/services/context_builder.py</code>) and <strong><code>DecisionExecutor</code></strong> (<code>astro/decision_engine/executor.py</code>), which runs <strong>explicit Python control flow</strong> (not a hidden graph runtime).</p>
+<p>At a high level, Astro turns <strong>fused features plus optional model scores</strong> into a <strong>final trade signal</strong> (e.g. BUY / SELL / HOLD semantics via <code>extract_signal_from_text</code>) under <strong>configurable governance</strong> (<code>model_governance</code> in <code>agents.yaml</code>, <code>apply_model_governance_detailed</code> in <code>policy.py</code>) and <strong>portfolio constraints</strong> (<code>apply_post_decision_risk</code>, SQLite positions). Outcomes are <strong>durable</strong>: JSON decision logs (when <code>log_dir</code> is set on the executor) and SQLite rows (e.g. <code>insert_decision</code> on <code>POST /api/v1/decision/run</code>).</p>
+<hr/>
+<h2 id="what-problems-astro-solves">What problems Astro solves<a class="headerlink" href="#what-problems-astro-solves" title="Permanent link">¶</a></h2>
+<h3 id="1-fragmented-trading-pipelines">1. Fragmented trading pipelines<a class="headerlink" href="#1-fragmented-trading-pipelines" title="Permanent link">¶</a></h3>
+<p><strong>Problem:</strong> Ingestion, feature code, modeling, and “strategy logic” often live in one script, making changes risky and debugging opaque.</p>
+<p><strong>Astro:</strong> <strong>Ingestion</strong> (<code>astro/ingestion/</code>) and <strong>pipelines</strong> (<code>astro/pipelines/</code>) produce <strong>versioned Parquet</strong>; <strong>features</strong> (<code>astro/features/</code>) enforce <strong>schema contracts</strong> (<code>schema_registry.json</code>, <code>validation.py</code>). The decision path <strong>reads</strong> those artifacts through <strong><code>FeatureService</code></strong> and <strong><code>build_decision_context</code></strong>, not ad-hoc fetches inside LLM tools.</p>
+<h3 id="2-limited-explainability-for-ml-only-signals">2. Limited explainability for ML-only signals<a class="headerlink" href="#2-limited-explainability-for-ml-only-signals" title="Permanent link">¶</a></h3>
+<p><strong>Problem:</strong> A raw classifier score is hard to defend without narrative context.</p>
+<p><strong>Astro:</strong> <strong>LLM agents</strong> generate <strong>auditable text</strong>: analyst reports, research history, trader plan, risk narrative (<code>astro/agents/</code>). The API returns <strong>truncated snippets</strong> and structured fields (e.g. <code>structured_market_facts</code>, <code>analyst_summary</code>) on <code>POST /api/v1/decision/run</code>. <strong>Replay</strong> (<code>GET /api/v1/replay</code>) can reload stored decisions or JSON logs—<strong>recompute</strong> is not implemented (<strong>501</strong>).</p>
+<h3 id="3-insufficient-control-over-model-versus-llm-behavior">3. Insufficient control over model versus LLM behavior<a class="headerlink" href="#3-insufficient-control-over-model-versus-llm-behavior" title="Permanent link">¶</a></h3>
+<p><strong>Problem:</strong> Teams need policy: when must the model agree, when can the LLM override, when should uncertainty force a deeper path.</p>
+<p><strong>Astro:</strong> <strong><code>model_governance</code></strong> and <strong><code>resolve_governance_mode</code></strong> (<code>astro/decision_engine/governance_mode.py</code>) support <strong>strict / degraded / dev</strong> modes (YAML + <code>ASTRO_GOVERNANCE_MODE</code>). <strong>Strict</strong> can return <strong>HTTP 503</strong> <code>model_required</code> on the decision route when a prediction is required but missing. <strong><code>DecisionExecutor.run</code></strong> can <strong>upgrade fast → full</strong> when model uncertainty exceeds <code>uncertainty_debate_threshold</code>, and <strong>skip research debate</strong> when the model is very certain (<code>policy.py</code>, <code>routing.py</code>).</p>
+<h3 id="4-train-versus-live-inconsistency">4. Train versus live inconsistency<a class="headerlink" href="#4-train-versus-live-inconsistency" title="Permanent link">¶</a></h3>
+<p><strong>Problem:</strong> Different code paths in research and production cause silent skew.</p>
+<p><strong>Astro:</strong> The same <strong>fused Parquet</strong> layout and <strong><code>FeatureService</code></strong> loading patterns underpin <strong>training</strong>, <strong>inference</strong>, <strong>backtest API</strong>, and <strong>decision context</strong>—provided operators use a <strong>consistent working directory</strong> and resolve <strong><code>data_root</code></strong> and <strong><code>ROOT</code></strong> as documented (<a href="architecture/system_design/">System design</a>). <strong>Schema validation</strong> runs at multiple boundaries (trainer, inference, backtest route).</p>
+<hr/>
+<h2 id="key-capabilities">Key capabilities<a class="headerlink" href="#key-capabilities" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>Data ingestion</strong> — IBKR-oriented helpers, news/sentiment streams (<code>astro/ingestion/</code>); optional <strong><code>ib_async</code></strong> extra.</li>
+<li><strong>Pipelines</strong> — Market, news, sentiment, and <strong>fusion</strong> to per-symbol fused Parquet (<code>astro/pipelines/</code>).</li>
+<li><strong>Feature engineering</strong> — Indicators, helpers, <strong>schema registry</strong>, fused-frame validation (<code>astro/features/</code>).</li>
+<li><strong>Transformer model</strong> — Train/infer with uncertainty (<code>astro/models/transformer/</code>); optional <strong><code>torch</code></strong> extra; <strong>ensemble</strong> package is largely stub.</li>
+<li><strong>Multi-agent reasoning</strong> — Analysts, bull/bear research, trader, three-way risk debate and judge (<code>astro/agents/</code>).</li>
+<li><strong>Decision engine</strong> — <code>DecisionExecutor</code> orchestrates stages; policy and portfolio hooks (<code>astro/decision_engine/</code>).</li>
+<li><strong>FastAPI layer</strong> — Health, config, data, model predict, partial agent runs, full decision, backtest, execution, replay, experiments, WebSocket heartbeat (<code>astro/api/</code>).</li>
+<li><strong>Backtesting</strong> — Signal-driven metrics over fused data (<code>astro/backtesting/</code>, <code>POST /api/v1/backtest/run</code>).</li>
+<li><strong>Execution layer</strong> — IBKR market orders via <code>TradeExecutor</code> and <strong>idempotent</strong> <code>OrderManager</code> (<code>astro/execution/</code>); <strong>paper-gated</strong> on the API route.</li>
+</ul>
+<hr/>
+<h2 id="how-astro-works-end-to-end-flow">How Astro works (end-to-end flow)<a class="headerlink" href="#how-astro-works-end-to-end-flow" title="Permanent link">¶</a></h2>
+<p>The diagram reflects <strong>logical order</strong> in code: the <strong>executor</strong> invokes <strong>agent stages</strong>; <strong>governance and portfolio</strong> run <strong>after</strong> LLM output inside <code>DecisionExecutor.run</code>. <strong>Execution</strong> is <strong>not</strong> automatic after a decision.</p>
+<div class="mermaid">flowchart LR
+  Req[User_or_API]
+  FS[FeatureService_and_context]
+  Inf[Optional_inference]
+  DC[DecisionContext]
+  Ex[DecisionExecutor]
+  Ag[Agent_stages]
+  Gov[Governance_and_portfolio]
+  Per[SQLite_and_JSON_logs]
+  Ord[Optional_execution_API]
+  Req --&gt; FS
+  FS --&gt; Inf
+  Inf --&gt; DC
+  DC --&gt; Ex
+  Ex --&gt; Ag
+  Ag --&gt; Gov
+  Gov --&gt; Per
+  Per --&gt; Ord</div>
+<h3 id="step-by-step-full-decision-path">Step-by-step (full decision path)<a class="headerlink" href="#step-by-step-full-decision-path" title="Permanent link">¶</a></h3>
+<ol>
+<li><strong>Trigger</strong> — HTTP <code>POST /api/v1/decision/run</code> or a script such as <code>scripts/run_decision.py</code>.</li>
+<li><strong>Config and paths</strong> — Cached <code>AstroConfig</code> (<code>get_config_cached</code>), <code>data_root_path(ROOT)</code>, checkpoints under project <strong><code>ROOT</code></strong> (<code>astro/api/dependencies.py</code>).</li>
+<li><strong>Load fused data</strong> — Resolve <code>{data_root}/features/{symbol}_fused.parquet</code>; build summaries and <code>structured_market_facts</code>; run <strong>schema validation</strong> into <code>context.extra</code>.</li>
+<li><strong>Optional model prediction</strong> — <code>load_inference_optional</code> + inference on latest window when <code>best.pt</code> / <code>scaler.npz</code> exist; attach <strong><code>ModelPrediction</code></strong> or record errors in <code>extra</code>.</li>
+<li><strong>Governance pre-check (API)</strong> — Under <strong>strict</strong> mode, missing model when required → <strong>503</strong> before LLM spend (<code>decision.py</code>).</li>
+<li><strong>Executor</strong> — <code>DecisionExecutor.run</code>: resolve <strong>fast</strong> vs <strong>full</strong> (and possible fast→full upgrade); run <strong>analysts</strong> → <strong>research</strong> (may be skipped) → <strong>trader</strong> → <strong>risk</strong> (multi-round or fast single judge).</li>
+<li><strong>Signal and policy</strong> — <code>extract_signal_from_text</code> → <code>apply_model_governance_detailed</code> → <code>apply_post_decision_risk</code> with SQLite exposure data.</li>
+<li><strong>Persist</strong> — API inserts a <strong>decision</strong> row; executor may write <strong>JSON</strong> under <code>data/cache/decision_logs/</code> when <code>log_dir</code> is configured.</li>
+<li><strong>Broker action (optional)</strong> — Only if a client calls <strong><code>POST /api/v1/execution/order</code></strong> separately (paper, idempotency key, optional <code>X-API-Key</code>).</li>
+</ol>
+<p>Deeper diagrams: <a href="architecture/data_flow/">Data flow</a>, <a href="architecture/sequence_diagrams/">Sequence diagrams</a>. Branching detail: <a href="design/lld/">LLD</a>.</p>
+<hr/>
+<h2 id="system-architecture-overview">System architecture overview<a class="headerlink" href="#system-architecture-overview" title="Permanent link">¶</a></h2>
+<div class="mermaid">flowchart TB
+  subgraph dataPlane [Data]
+    A1[Market_inputs]
+    A2[News_inputs]
+    A3[Social_sentiment_inputs]
+  end
+  subgraph proc [Processing]
+    B1[Pipelines]
+    B2[Feature_fusion_and_validation]
+  end
+  subgraph intel [Intelligence]
+    C1[Transformer_train_and_infer]
+    C2[DecisionExecutor]
+    C3[LLM_agent_stages]
+  end
+  subgraph out [Output_and_control]
+    D1[FastAPI]
+    D2[IBKR_execution]
+    D3[Backtesting]
+  end
+  A1 --&gt; B1
+  A2 --&gt; B1
+  A3 --&gt; B1
+  B1 --&gt; B2
+  B2 --&gt; C1
+  B2 --&gt; C2
+  C1 --&gt; C2
+  C2 --&gt; C3
+  C2 --&gt; D1
+  C2 --&gt; D3
+  D1 --&gt; D2</div>
+<p><strong>Reading the diagram:</strong> Fused features feed both <strong>inference</strong> and the <strong>executor</strong>. The executor <strong>drives</strong> the LLM stages (<code>C3</code>). The API exposes control and reads; <strong>execution</strong> is reachable from the API but <strong>guarded</strong> (<code>ibkr.paper</code>, optional API key).</p>
+<hr/>
+<h2 id="core-components">Core components<a class="headerlink" href="#core-components" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ingestion</strong></td>
+<td>Acquire market, news, sentiment inputs; IBKR client and streams (<code>astro/ingestion/</code>).</td>
+</tr>
+<tr>
+<td><strong>Pipelines</strong></td>
+<td>Deterministic transforms to Parquet; fusion into per-symbol fused files (<code>astro/pipelines/</code>).</td>
+</tr>
+<tr>
+<td><strong>Features</strong></td>
+<td>Indicators, validation, <strong>schema registry</strong> (<code>astro/features/</code>).</td>
+</tr>
+<tr>
+<td><strong>Model</strong></td>
+<td>Transformer dataset, trainer, inference helpers (<code>astro/models/transformer/</code>).</td>
+</tr>
+<tr>
+<td><strong>Agents</strong></td>
+<td>LLM analysts, researchers, trader, risk debators and judge (<code>astro/agents/</code>).</td>
+</tr>
+<tr>
+<td><strong>Decision engine</strong></td>
+<td><code>DecisionExecutor</code>, policy, routing, workflow, governance mode (<code>astro/decision_engine/</code>).</td>
+</tr>
+<tr>
+<td><strong>Services</strong></td>
+<td><code>FeatureService</code>, <code>build_decision_context</code>, model readiness for health (<code>astro/services/</code>).</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>SQLite <code>MetadataDB</code> for decisions, orders, positions, experiments (<code>astro/storage/</code>).</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>FastAPI app, routes, schemas, IBKR lifespan (<code>astro/api/</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="decision-intelligence-what-is-distinctive">Decision intelligence (what is distinctive)<a class="headerlink" href="#decision-intelligence-what-is-distinctive" title="Permanent link">¶</a></h2>
+<p>Astro is designed as a <strong>decision intelligence</strong> stack, not only a backtester or a chatbot:</p>
+<ul>
+<li><strong>Hybrid reasoning</strong> — Numeric <strong>model output</strong> (when present) participates in <strong>routing</strong> (fast→full, skip debate) and <strong>governance</strong> alongside LLM-extracted signals.</li>
+<li><strong>Governed decisions</strong> — Configurable <strong>strict</strong> refusal when the model is required but absent; <strong>degraded</strong> / <strong>dev</strong> modes for non-production use.</li>
+<li><strong>Dynamic depth</strong> — <strong>Fast</strong> path reduces LLM surface area; <strong>full</strong> path runs research and multi-party risk debate within configured round limits.</li>
+<li><strong>Traceable outputs</strong> — Rich API response fields plus on-disk <strong>JSON</strong> and <strong>SQLite</strong> for replay and ops.</li>
+</ul>
+<hr/>
+<h2 id="who-should-use-astro">Who should use Astro<a class="headerlink" href="#who-should-use-astro" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>Quant and trading systems engineers</strong> — pipelines, risk config, execution paths.</li>
+<li><strong>ML engineers</strong> — training, inference, schema alignment, evaluation.</li>
+<li><strong>Algorithmic traders and strategists</strong> — backtests, decision modes, governance tuning.</li>
+<li><strong>Backend and integration engineers</strong> — HTTP API, OpenAPI, Postman, auth on execution.</li>
+<li><strong>Operators and SRE</strong> — deployment without bundled Docker, health checks, IBKR connectivity toggles.</li>
+</ul>
+<hr/>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Start here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Install and run locally</td>
+<td><a href="setup/installation/">Installation</a></td>
+</tr>
+<tr>
+<td>YAML and environment</td>
+<td><a href="setup/configuration/">Configuration</a></td>
+</tr>
+<tr>
+<td>Production-style deployment</td>
+<td><a href="setup/deployment/">Deployment</a></td>
+</tr>
+<tr>
+<td>Vision / goals / problem framing</td>
+<td><a href="overview/vision/">Overview</a>, <a href="overview/goals/">Goals</a>, <a href="overview/problem_statement/">Problem statement</a></td>
+</tr>
+<tr>
+<td>HLD and flows</td>
+<td><a href="architecture/hld/">HLD</a>, <a href="architecture/data_flow/">Data flow</a>, <a href="architecture/system_design/">System design</a></td>
+</tr>
+<tr>
+<td>Executor and policy detail</td>
+<td><a href="design/lld/">LLD</a></td>
+</tr>
+<tr>
+<td>HTTP reference</td>
+<td><a href="api/overview/">API overview</a>, <a href="api/endpoints/">Endpoints</a></td>
+</tr>
+<tr>
+<td>Package map</td>
+<td><a href="design/module_breakdown/">Module breakdown</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interactive OpenAPI</strong> (with the server running): <code>http://localhost:8000/docs</code> and <code>http://localhost:8000/redoc</code> (<a href="setup/installation/">Installation</a>).</p>
+<p><strong>Postman:</strong> <code>postman/Astro_Trading_API.postman_collection.json</code></p>
+<p><strong>Monolithic design note (repo root):</strong> <code>astro_project.md</code> — long-form single document; this site splits it for navigation.</p>
+<hr/>
+<h2 id="current-limitations">Current limitations<a class="headerlink" href="#current-limitations" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>No Docker or CI</strong> in the repository — deployment is <strong>process-based</strong> (e.g. <code>uvicorn</code>); see <a href="setup/deployment/">Deployment</a>.</li>
+<li><strong>IBKR</strong> is optional for API startup (<code>ASTRO_SKIP_IBKR_CONNECT</code>) but <strong>required</strong> for real broker execution; depends on <strong><code>[ibkr]</code></strong> and a running Gateway/TWS.</li>
+<li><strong>Monitoring</strong> (<code>astro/monitoring/</code>) and <strong>ensemble</strong> (<code>astro/models/ensemble/</code>) are <strong>partial / stub</strong> in the current tree.</li>
+<li><strong>No HTTP rate limiting</strong> middleware in-repo.</li>
+<li><strong>Path sensitivity</strong> — Relative <code>data_root</code> and checkpoint paths assume a <strong>consistent project root</strong> / <code>ROOT</code> resolution; misaligned cwd causes subtle bugs (<a href="architecture/system_design/">System design</a>).</li>
+<li><strong>WebSocket</strong> <code>/ws/stream</code> is a <strong>heartbeat</strong> only, not a market data feed.</li>
+</ul>
+<hr/>
+<h2 id="future-scope">Future scope<a class="headerlink" href="#future-scope" title="Permanent link">¶</a></h2>
+<p>High-level themes (not commitments): <strong>container/CI</strong> for build and deploy, <strong>mkdocstrings</strong>-style API reference, <strong>real monitoring</strong> instead of stubs, <strong>ensemble</strong> implementation, <strong>replay recompute</strong>, richer <strong>WebSocket</strong> payloads, <strong>horizontal scaling</strong> with externalized SQLite, broader <strong>auth</strong> than execution-only API key. See <a href="roadmap/future_scope/">Future scope</a> for the maintained list.</p>
+<hr/>
+<h2 id="safety-reminders">Safety reminders<a class="headerlink" href="#safety-reminders" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong><code>POST /api/v1/decision/run</code></strong> may return <strong>503</strong> <code>model_required</code> under <strong>strict</strong> governance when a model prediction is required but missing — <a href="api/endpoints/#decision">Decision</a>.</li>
+<li><strong><code>POST /api/v1/execution/order</code></strong> requires <strong><code>paper: true</code></strong> in <code>ibkr.yaml</code> for this build; optional <strong><code>ASTRO_API_KEY</code></strong> and header <strong><code>X-API-Key</code></strong>.</li>
+</ul>
+<hr/>
+<p>Astro is intended as a <strong>foundation for governed, extensible trading intelligence</strong>: clear phases, inspectable artifacts, and explicit control over when models, LLMs, and brokers are allowed to act.</p>
+<p>Use the <strong>tabs</strong> above to browse Overview, Architecture, Design, API, Modules, Setup, Guides, and Roadmap.</p>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.6.1/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
+</html>
