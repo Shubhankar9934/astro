@@ -47,6 +47,9 @@ htmlcov/
 # IDE
 .idea/
 
+# Cursor (local plans; keep off GitHub)
+.cursor/plans/
+
 # OS
 .DS_Store
 Thumbs.db
