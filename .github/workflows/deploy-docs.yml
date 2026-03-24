@@ -1,12 +1,15 @@
-# MkDocs → https://mlwithshubh.me/astro/  (folder on your root GitHub Pages repo, e.g. *.github.io)
+# mlwithshubh.me/astro/  = root Pages repo (e.g. *.github.io) → folder astro/
 #
-# peaceiris: with destination_dir set, the DEFAULT is to delete existing files *only under*
-# that folder, then copy ./site there. Socio_Sim_AI/ and other siblings stay intact.
-# keep_files: true was WRONG here — it left old README / markdown next to MkDocs index.html,
-# so the site kept showing the long “Project Astro – Technical Overview” text instead of Material.
+# peaceiris needs a *personal* PAT to push to another repo; GITHUB_TOKEN cannot.
+# Error "not found deploy key or tokens" = secret GH_PAGES_DEPLOY_TOKEN is missing/empty
+# or DEPLOY_ROOT_SITE is true but the secret was never added.
 #
-# Required on this repo: Secret GH_PAGES_DEPLOY_TOKEN = PAT with Contents: write on the site repo.
-# Optional variables: PAGES_ROOT_REPO, PAGES_ROOT_BRANCH (defaults below).
+# Enable root deploy (BOTH required):
+#   1. Repo variable DEPLOY_ROOT_SITE = true
+#   2. Repo secret GH_PAGES_DEPLOY_TOKEN = PAT with Contents: Read+Write on the site repo
+# Optional: PAGES_ROOT_REPO, PAGES_ROOT_BRANCH (defaults below).
+#
+# If DEPLOY_ROOT_SITE is not "true", we only push to this repo’s gh-pages (no PAT needed).
 
 name: Deploy documentation
 
@@ -40,7 +43,8 @@ jobs:
       - name: Build MkDocs site
         run: mkdocs build --strict
 
-      - name: Push site to root Pages repo (replaces astro/ only)
+      - name: Push to root site repo (mlwithshubh.me/astro/)
+        if: vars.DEPLOY_ROOT_SITE == 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.GH_PAGES_DEPLOY_TOKEN }}
@@ -48,4 +52,11 @@ jobs:
           publish_branch: ${{ vars.PAGES_ROOT_BRANCH != '' && vars.PAGES_ROOT_BRANCH || 'main' }}
           publish_dir: ./site
           destination_dir: astro
-          # default keep_files: false → clear destination_dir before deploy; does NOT delete /Socio_Sim_AI/
+
+      - name: Push to this repo gh-pages only
+        if: vars.DEPLOY_ROOT_SITE != 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          force_orphan: true

@@ -48,8 +48,8 @@ If `/astro/` shows a long **“Project Astro – Technical Overview”** (plain 
 
 In **this** (`astro`) repository:
 
-1. **PAT** with **Contents: Read and write** on the **site** repo (e.g. `Shubhankar9934.github.io`—use your real repo name).
-2. **Settings → Secrets → Actions** → **`GH_PAGES_DEPLOY_TOKEN`** = that PAT.
+1. **Settings → Secrets and variables → Actions → Variables** → **`DEPLOY_ROOT_SITE`** = **`true`** (exact string). Without this, the workflow only updates **this** repo’s **`gh-pages`** branch (and peaceiris will **not** ask for a PAT).
+2. **Settings → Secrets → Actions** → **`GH_PAGES_DEPLOY_TOKEN`** = a **personal access token** (fine-grained or classic) with **Contents: Read and write** on the **site** repo (e.g. `Shubhankar9934.github.io`). **Repository** `GITHUB_TOKEN` cannot push to another repo; if the secret is missing you get **`not found deploy key or tokens`** from peaceiris.
 3. Optional **Variables**: **`PAGES_ROOT_REPO`**, **`PAGES_ROOT_BRANCH`** if not `Shubhankar9934/Shubhankar9934.github.io` / `main`.
 
 The workflow uses [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) with **`destination_dir: astro`**. With **`keep_files` left at default (false)** peaceiris **removes existing files only under `astro/`**, then copies `./site`—sibling folders like **`Socio_Sim_AI/`** stay. Do **not** set `keep_files: true` for this layout or old `README.md` / markdown can remain and override what you expect to see.
