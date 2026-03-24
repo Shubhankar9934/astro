@@ -38,6 +38,10 @@ Use **`workers 1`** unless you refactor global singletons (`lru_cache` config, `
 
 Build with `mkdocs build` and serve `site/` from any static host, or run `mkdocs serve` for internal previews only.
 
+### GitHub Pages (this repository)
+
+The workflow **Deploy documentation** pushes the built site to the **`gh-pages`** branch. In the repo **Settings → Pages → Build and deployment**, set **Source** to **Deploy from a branch**, branch **`gh-pages`**, folder **`/` (root)**, then save. If **Source** is left on **GitHub Actions** while using this workflow, the default `github.io/<repo>/` URL stays empty (404) because GitHub will not publish the `gh-pages` branch. On GitHub, switch the branch dropdown to **`gh-pages`** and confirm **`index.html`** exists at the root of that branch.
+
 ## Security hardening (operational)
 
 - Restrict CORS in `astro/api/app.py` for production.

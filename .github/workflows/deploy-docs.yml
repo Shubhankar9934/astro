@@ -1,11 +1,13 @@
 # Publishes MkDocs output to the orphan branch `gh-pages`.
-# Works with the classic Pages UI (no deploy-pages API / no “enable Actions publisher” step).
 #
-# GitHub setup:
-#   1. Repo → Settings → Pages → Build and deployment → Source: Deploy from a branch
-#   2. Branch: gh-pages  ·  Folder: / (root)  ·  Save
-#   3. Settings → Actions → General → Workflow permissions: Read and write (needed to push gh-pages)
-#   4. Push to main (or run this workflow manually). Site: https://<user>.github.io/<repo>/
+# If https://<user>.github.io/<repo>/ shows “There isn't a GitHub Pages site here” AFTER
+# this workflow is green: Pages is still using the wrong *source*. You MUST use the branch,
+# not GitHub Actions:
+#   Settings → Pages → Build and deployment → Source: Deploy from a branch
+#   Branch: gh-pages  ·  Folder: / (root)  ·  Save
+# If Source stays “GitHub Actions”, GitHub never serves gh-pages (404).
+#
+# Also: Settings → Actions → General → Workflow permissions: Read and write (to push gh-pages).
 
 name: Deploy documentation
 
