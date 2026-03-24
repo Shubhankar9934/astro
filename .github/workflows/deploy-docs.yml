@@ -1,15 +1,12 @@
-# MkDocs → https://mlwithshubh.me/astro/  (subfolder on your *root* GitHub Pages repo)
+# MkDocs → https://mlwithshubh.me/astro/  (folder on your root GitHub Pages repo, e.g. *.github.io)
 #
-# That URL is NOT served from this repo’s gh-pages alone; it comes from the site repo that
-# already hosts mlwithshubh.me (e.g. Shubhankar9934.github.io). This workflow pushes ./site
-# into that repo under destination_dir astro/ without wiping sibling folders (Socio_Sim_AI, …).
+# peaceiris: with destination_dir set, the DEFAULT is to delete existing files *only under*
+# that folder, then copy ./site there. Socio_Sim_AI/ and other siblings stay intact.
+# keep_files: true was WRONG here — it left old README / markdown next to MkDocs index.html,
+# so the site kept showing the long “Project Astro – Technical Overview” text instead of Material.
 #
-# Setup (this “astro” repo):
-#   1. Fine-grained or classic PAT with Contents: Read+Write on the *root site* repository.
-#   2. Settings → Secrets → Actions → GH_PAGES_DEPLOY_TOKEN = that PAT.
-#   3. Optional: repo Variable PAGES_ROOT_REPO = owner/name (default below). PAGES_ROOT_BRANCH if not main.
-#
-# If you skip the secret, only the “this repo gh-pages” step runs (github.io/astro/), not mlwithshubh.me/astro/.
+# Required on this repo: Secret GH_PAGES_DEPLOY_TOKEN = PAT with Contents: write on the site repo.
+# Optional variables: PAGES_ROOT_REPO, PAGES_ROOT_BRANCH (defaults below).
 
 name: Deploy documentation
 
@@ -43,9 +40,7 @@ jobs:
       - name: Build MkDocs site
         run: mkdocs build --strict
 
-      # Publishes only into site-repo/astro/; keep_files preserves /Socio_Sim_AI/ etc.
-      - name: Push site to root Pages repo (mlwithshubh.me/astro/)
-        if: ${{ vars.PUBLISH_TO_PAGES_ROOT == 'true' }}
+      - name: Push site to root Pages repo (replaces astro/ only)
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.GH_PAGES_DEPLOY_TOKEN }}
@@ -53,12 +48,4 @@ jobs:
           publish_branch: ${{ vars.PAGES_ROOT_BRANCH != '' && vars.PAGES_ROOT_BRANCH || 'main' }}
           publish_dir: ./site
           destination_dir: astro
-          keep_files: true
-
-      - name: Push site to this repo gh-pages (fallback)
-        if: ${{ vars.PUBLISH_TO_PAGES_ROOT != 'true' }}
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
-          force_orphan: true
+          # default keep_files: false → clear destination_dir before deploy; does NOT delete /Socio_Sim_AI/

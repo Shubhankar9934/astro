@@ -40,24 +40,23 @@ Build with `mkdocs build` and serve `site/` from any static host, or run `mkdocs
 
 ### GitHub Pages (this repository)
 
-#### Default: only this repo (`github.io/<repo>/`)
+#### `https://mlwithshubh.me/astro/` (next to `/Socio_Sim_AI/`)
 
-If you do **not** set the variable below, the workflow pushes the MkDocs build to this repository’s **`gh-pages`** branch. Then use **Settings → Pages → Source: Deploy from a branch → `gh-pages` → `/`**.
+That URL is served by your **root GitHub Pages repository** (the one `mlwithshubh.me` uses—often **`username.github.io`**), not by this repo’s `gh-pages` branch alone.
 
-#### `https://mlwithshubh.me/astro/` (folder next to `/Socio_Sim_AI/`)
-
-That URL is served by your **root GitHub Pages repository** (the one `mlwithshubh.me` points at—often **`username.github.io`**), not by this `astro` repo alone. If `/astro/` shows a **README** instead of the **Material** MkDocs UI, the folder only has markdown/README content; you need to deploy the **`mkdocs build`** output (`site/`) **into** that repo under **`astro/`**.
+If `/astro/` shows a long **“Project Astro – Technical Overview”** (plain text, no Material chrome), the folder still has **old markdown/README** (or a partial deploy). The workflow must push the full **`mkdocs build`** output into **`astro/`** on that root repo, and **replace** everything under `astro/` each time.
 
 In **this** (`astro`) repository:
 
-1. Create a **PAT** (classic *or* fine-grained) with **Contents: Read and write** on the **root site** repo (e.g. `Shubhankar9934.github.io`—name must match yours).
-2. **Settings → Secrets and variables → Actions → New repository secret** → `GH_PAGES_DEPLOY_TOKEN` = the PAT.
-3. **Settings → Secrets and variables → Actions → Variables → New repository variable** → `PUBLISH_TO_PAGES_ROOT` = `true`.
-4. Optional variables: `PAGES_ROOT_REPO` (default `Shubhankar9934/Shubhankar9934.github.io`), `PAGES_ROOT_BRANCH` (default `main`) if your site repo name or default branch differs.
+1. **PAT** with **Contents: Read and write** on the **site** repo (e.g. `Shubhankar9934.github.io`—use your real repo name).
+2. **Settings → Secrets → Actions** → **`GH_PAGES_DEPLOY_TOKEN`** = that PAT.
+3. Optional **Variables**: **`PAGES_ROOT_REPO`**, **`PAGES_ROOT_BRANCH`** if not `Shubhankar9934/Shubhankar9934.github.io` / `main`.
 
-The workflow uses [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) with **`destination_dir: astro`** and **`keep_files: true`** so other paths (e.g. **`/Socio_Sim_AI/`**) are not deleted. After a green **Deploy documentation** run, **`https://mlwithshubh.me/astro/`** should show the full MkDocs site; **`site_url`** in `mkdocs.yml` must stay **`https://mlwithshubh.me/astro/`** so CSS and links resolve.
+The workflow uses [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) with **`destination_dir: astro`**. With **`keep_files` left at default (false)** peaceiris **removes existing files only under `astro/`**, then copies `./site`—sibling folders like **`Socio_Sim_AI/`** stay. Do **not** set `keep_files: true` for this layout or old `README.md` / markdown can remain and override what you expect to see.
 
-See GitHub’s [custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) docs if DNS for the apex domain is not already configured.
+After a green **Deploy documentation** run, open **`https://mlwithshubh.me/astro/`** in a private window; **`site_url`** in `mkdocs.yml` should stay **`https://mlwithshubh.me/astro/`**.
+
+See GitHub’s [custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) docs for apex DNS if needed.
 
 ## Security hardening (operational)
 
